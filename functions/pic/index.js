@@ -4,7 +4,7 @@ export function onRequest(context) {
 }
 
 // 配置项 - 每个目录的图片数量配置
-var CONFIG = {
+const CONFIG = {
   imageCount: {
     page1: {
       1: 38,
@@ -121,8 +121,8 @@ var CONFIG = {
 
 // 根据文件扩展名获取MIME类型
 function getMimeType(filename) {
-  var ext = filename.toLowerCase().split(".").pop();
-  var mimeTypes = {
+  const ext = filename.toLowerCase().split(".").pop();
+  const mimeTypes = {
     jpg: "image/jpeg",
     jpeg: "image/jpeg",
     png: "image/png",
@@ -137,20 +137,20 @@ function getMimeType(filename) {
 // 获取随机图片路径
 function getRandomImagePath() {
   // 随机选择页面 (page1-page5)
-  var pageNum = Math.floor(Math.random() * 5) + 1;
-  var pageName = "page" + pageNum;
+  const pageNum = Math.floor(Math.random() * 5) + 1;
+  const pageName = "page" + pageNum;
 
   // 随机选择子目录 (1-20)
-  var subDir = Math.floor(Math.random() * 20) + 1;
+  const subDir = Math.floor(Math.random() * 20) + 1;
 
   // 获取该目录下的图片数量
-  var maxImages = CONFIG.imageCount[pageName][subDir];
+  const maxImages = CONFIG.imageCount[pageName][subDir];
 
   // 随机选择图片编号
-  var imageNum = Math.floor(Math.random() * maxImages) + 1;
+  const imageNum = Math.floor(Math.random() * maxImages) + 1;
 
   // 构建完整路径
-  var imagePath = "i/" + pageName + "/" + subDir + "/" + imageNum + ".jpg";
+  const imagePath = "i/" + pageName + "/" + subDir + "/" + imageNum + ".jpg";
 
   return {
     path: imagePath,
@@ -163,19 +163,19 @@ function getRandomImagePath() {
 
 async function handleRequest(request) {
   try {
-    var url = new URL(request.url);
-    var imgType = url.searchParams.get("img");
+    const url = new URL(request.url);
+    const imgType = url.searchParams.get("img");
 
     if (imgType === "random" || imgType === "r") {
       // 获取随机图片信息
-      var imageInfo = getRandomImagePath();
+      const imageInfo = getRandomImagePath();
 
       // 构建代理URL
-      var proxyUrl =
+      const proxyUrl =
         "https://cnb.cool/HurryWang/img/-/git/raw/master/" + imageInfo.path;
 
       // 发起反代请求
-      var proxyResponse = await fetch(proxyUrl, {
+      const proxyResponse = await fetch(proxyUrl, {
         headers: {
           Accept:
             "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
@@ -199,7 +199,7 @@ async function handleRequest(request) {
       }
 
       // 获取图片数据
-      var imageData = await proxyResponse.arrayBuffer();
+      const imageData = await proxyResponse.arrayBuffer();
 
       // 返回图片
       return new Response(imageData, {
@@ -218,7 +218,7 @@ async function handleRequest(request) {
       });
     } else {
       // 显示使用说明
-      var helpText = "🖼️ 随机图片展示器\n\n";
+      const helpText = "🖼️ 随机图片展示器\n\n";
       helpText += "使用方法:\n";
       helpText += "• ?img=random 或 ?img=r - 获取随机图片\n\n";
       helpText += "目录结构:\n";
@@ -242,7 +242,7 @@ async function handleRequest(request) {
       });
     }
   } catch (error) {
-    var errorDetails = "❌ 内部错误\n\n";
+    const errorDetails = "❌ 内部错误\n\n";
     errorDetails += "错误消息: " + error.message + "\n";
     errorDetails += "错误堆栈: " + error.stack + "\n";
     errorDetails += "请求地址: " + request.url + "\n";
