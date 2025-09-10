@@ -340,8 +340,8 @@
             <div class="endpoint">
               <h3>获取随机图片</h3>
               <p>获取一张随机图片</p>
-              <code>GET /pic?img=random</code>
-              <code>GET /pic?img=r</code>
+              <code>GET /api/img?img=random</code>
+              <code>GET /api/img?img=r</code>
             </div>
 
             <div class="endpoint">
@@ -403,7 +403,7 @@
         downloadBtn.style.display = "none";
 
         try {
-          const response = await fetch("/pic?img=r");
+          const response = await fetch("/api/img?img=r");
 
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
