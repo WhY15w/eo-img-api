@@ -218,7 +218,7 @@ async function handleRequest(request) {
       });
     } else {
       // 显示使用说明
-      const helpText = "🖼️ 随机图片展示器\n\n";
+      let helpText = "🖼️ 随机图片展示器\n\n";
       helpText += "使用方法:\n";
       helpText += "• ?img=random 或 ?img=r - 获取随机图片\n\n";
       helpText += "目录结构:\n";
@@ -242,7 +242,7 @@ async function handleRequest(request) {
       });
     }
   } catch (error) {
-    const errorDetails = "❌ 内部错误\n\n";
+    let errorDetails = "❌ 内部错误\n\n";
     errorDetails += "错误消息: " + error.message + "\n";
     errorDetails += "错误堆栈: " + error.stack + "\n";
     errorDetails += "请求地址: " + request.url + "\n";
