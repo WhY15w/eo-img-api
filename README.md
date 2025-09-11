@@ -11,23 +11,15 @@
 - 💾 **缓存优化** - 智能缓存策略，提升访问速度
 - 📱 **响应式界面** - 提供美观的展示界面
 
-## 🎯 图片资源
-
-- **图片总数**: 2000+ 张高质量图片
-- **目录结构**: 5 个页面目录 (page1-page5)
-- **子目录**: 每页面 20 个子目录
-- **图片格式**: JPG 格式
-- **图片数量**: 每目录 7-170 张不等
-
 ## 🚀 快速开始
 
 ### API 调用
 
 ```bash
 # 获取随机图片
-curl "https://your-domain.com/pic?img=random"
+curl "https://your-domain.com/api/img?img=random"
 # 或
-curl "https://your-domain.com/pic?img=r"
+curl "https://your-domain.com/api/img?img=r"
 ```
 
 ### 响应信息
@@ -49,7 +41,7 @@ API 会在响应头中返回以下信息：
 // 获取随机图片
 async function getRandomImage() {
   try {
-    const response = await fetch("/pic?img=random");
+    const response = await fetch("/api/img?img=random");
 
     // 获取图片信息
     const imageInfo = {
@@ -81,11 +73,11 @@ async function getRandomImage() {
 ```html
 <!-- 直接在 img 标签中使用 -->
 <img
-  src="/pic?img=random"
+  src="/api/img?img=random"
   alt="随机图片" />
 
 <!-- 或者作为背景图片 -->
-<div style="background-image: url('/pic?img=random');"></div>
+<div style="background-image: url('/api/img?img=random');"></div>
 ```
 
 ## 📁 项目结构
@@ -93,8 +85,9 @@ async function getRandomImage() {
 ```
 eo-img-api/
 ├── functions/
-│   └── pic/
-│       └── index.js          # EdgeOne Pages Function
+│   └── api/
+│       └── img/
+│           └── index.js          # EdgeOne Pages Function
 ├── index.html                # 展示界面
 └── README.md                # 项目说明
 ```
@@ -113,8 +106,8 @@ eo-img-api/
 
 2. **配置 Functions**
 
-   - 将 `functions/pic/index.js` 部署为 EdgeOne Pages Function
-   - 函数会自动绑定到 `/pic` 路径
+   - 将 `functions/api/img/index.js` 部署为 EdgeOne Pages Function
+   - 函数会自动绑定到 `/api/img` 路径
 
 3. **配置域名**
    - 在 EdgeOne 控制台绑定自定义域名
@@ -134,7 +127,7 @@ python -m http.server 8000
 
 ### 图片数量配置
 
-在 `functions/pic/index.js` 中的 `CONFIG` 对象定义了每个目录的图片数量：
+在 `functions/api/img/index.js` 中的 `CONFIG` 对象定义了每个目录的图片数量：
 
 ```javascript
 var CONFIG = {
@@ -157,7 +150,7 @@ var CONFIG = {
 
 ## 🌐 API 接口
 
-### GET /pic
+### GET /api/img
 
 获取图片或显示帮助信息
 
